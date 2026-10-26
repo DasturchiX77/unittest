@@ -12,15 +12,15 @@ body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-
 h1{font-size:24px;margin:8px 0 4px}p.s{color:var(--mu);margin:0 0 20px}
 .c{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;margin-bottom:14px}
 .c h2{margin:0 0 12px;font-size:17px}
-.g{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.g{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.g3{grid-template-columns:repeat(3,1fr)}
 button{font:inherit;color:inherit;cursor:pointer}
-.u,.big{background:var(--bg);border:1px solid var(--bd);border-radius:12px;padding:14px 0;font-weight:600}
-.u:hover,.big:hover{border-color:var(--pr);color:var(--pr)}
-.big{width:100%;padding:14px}
+.big{background:var(--bg);border:1px solid var(--bd);border-radius:12px;padding:14px;font-weight:600;width:100%}
+.big:hover{border-color:var(--pr);color:var(--pr)}
 .top{display:flex;justify-content:space-between;color:var(--mu);font-size:14px;margin-bottom:8px}
 .bar{height:8px;background:var(--bd);border-radius:8px;overflow:hidden;margin-bottom:22px}
 .bar i{display:block;height:100%;width:100%;background:var(--pr)}
 .q{font-size:26px;font-weight:700;text-align:center;margin:10px 0 24px;line-height:1.3}
+.q small{display:block;font-size:15px;font-weight:500;color:var(--mu);margin-top:6px}
 .o{display:block;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:10px;font-size:17px}
 .o:hover:not(:disabled){border-color:var(--pr)}
 .o.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}
@@ -43,10 +43,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .b.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}
 .b.no{border-color:var(--no);background:color-mix(in srgb,var(--no) 18%,var(--card))}
 .hid{position:absolute;inset:0;width:100%;height:100%;opacity:0;font-size:16px;border:0}
+.rows{position:relative;margin-bottom:14px}.rw{text-align:center;margin-bottom:10px}
+.rw small{display:block;color:var(--mu);font-size:12px;margin-bottom:4px}
+.rows .bx{margin:0}.rows .b{width:36px;height:46px;font-size:21px;text-transform:none}
+@media(max-width:420px){.rows .b{width:28px;height:40px;font-size:18px}.rows .bx{gap:5px}}
 .fb{text-align:center;font-size:18px;margin-top:14px;min-height:28px}
 .pb{height:10px;background:var(--bd);border-radius:10px;overflow:hidden;margin:14px 0 4px}.pb i{display:block;height:100%;background:linear-gradient(90deg,var(--pr),#ec4899)}
 .rec{text-align:center;color:var(--mu);font-size:13px;margin-top:8px}
- 
 </style></head><body><div class="w" id="app"></div>
 <script>
 const RAW={
@@ -149,130 +152,138 @@ result=natija, oqibat
 roll=yumalatmoq, dumalatmoq
 since=-dan beri/buyon
 visible=ko'zga ko'rinarli, ko'rinib turgan
-wild=yovvoyi`,
-6:`advantage=ustun jihat, foyda
-cause=sabab bo'lmoq
-choice=tanlash imkoniyati
-community=jamiyat, jamoa
-dead=o'lgan, o'lik
-distance=masofa
-escape=qochib qutulmoq
-face=duch kelmoq, yuzlanmoq
-follow=ortidan bormoq, ergashmoq
-fright=qo'rquv, vahima
-ghost=rux, arvox
-individual=individ, kishi
-pet=uy hayvoni
-reach=yetib bormoq, yetib kelmoq
-return=qaytib kelmoq
-survive=tirik qolmoq; saqlab qolmoq
-upset=xafa, tushkun
-voice=ovoz, tovush
-weather=ob-havo
-wise=aqlli, dono`,
-7:`allow=ruxsat bermoq; imkoniyat bermoq
-announce=e'lon qilmoq, ma'lum qilmoq
-beside=yonma-yon, yonida
-challenge=qiyinchilik, mushkul ish
-claim=tasdiqlamoq, ma'qullamoq
-condition=ahvol, holat
-contribute=xayr qilmoq; hissa qo'shmoq
-difference=farq, tafovut
-divide=taqsimlamoq, bo'lmoq
-expert=ekspert, mutaxassis, usta
-famous=mashhur, taniqli
-force=kuch, qudrat
-harm=jabr, jarohat
-lay=qo'ymoq
-peace=tinchlik
-prince=shahzoda
-protect=himoya qilmoq, asramoq
-sense=sezmoq, his qilmoq
-sudden=kutilmagan, tasodifiy
-therefore=shu sababli, shuning uchun`,
-8:`accept=qabul qilmoq
-arrange=joy-joyiga qo'ymoq, tartibga keltirmoq
-attend=bormoq
-balance=muvozanat saqlamoq
-contrast=katta farq
-encourage=ruhlantirmoq, ruhini ko'tarmoq
-familiar=tanish, qadrdon
-grab=uzmoq; olmoq
-hang=osmoq, ilmoq
-huge=katta, ulkan
-necessary=shart, zarur
-pattern=uslub, yo'nalish, yo'l
-propose=taklif qilmoq
-purpose=maqsad
-release=qo'yib yubormoq, ozod qilmoq
-require=talab qilinmoq, talab qilmoq
-single=bitta, bir dona
-success=muvaffaqiyat, yutuq
-tear=yirtmoq
-theory=nazariya`,
-9:`against=ro'baro, qarama-qarshi yo'nalishda
-beach=sohil, plyaj
-damage=shikastlamoq
-discover=topmoq, kashf qilmoq
-emotion=emotsiya, ruhiy kechinma
-fix=tuzatmoq, ta'mirlamoq; hal etmoq
-frank=ochiq, samimiy
-identify=tanib bilmoq
-island=orol
-ocean=okean, ummon
-perhaps=ehtimol, balki
-pleasant=yoqimli
-prevent=to'sqinlik qilmoq
-rock=tosh
-save=asramoq, saqlamoq
-step=yurmoq, qadam tashlamoq
-still=hali ham, haligacha
-taste=ta'm, maza
-throw=irg'itmoq, uloqtirmoq
-wave=to'lqin, mavj`,
-10:`benefit=foyda, ustun jihat
-certain=ishonchi komil
-chance=imkoniyat, shans
-effect=ta'sir, samara
-essential=juda muhim, zarur(iy)
-far=uzoq, olis
-focus=diqqatini qaratmoq
-function=funksiya, vazifa
-grass=maysa, o't
-guard=qo'riqlamoq
-image=rasm, ko'rinish
-immediate=tezkor
-primary=asosiy, birinchi darajali
-proud=fahrlangan
-remain=qolmoq
-rest=dam olmoq
-separate=alohida, ajralgan, bo'lak
-site=joy
-tail=dum
-trouble=muammo; qiyinchilik`};
+wild=yovvoyi`};
+// Noto'g'ri fellar: V1|V2|V3|o'zbekcha  ("/" = qabul qilinadigan variantlar)
+const IRR=`cost|cost|cost|(narxi) turmoq
+cut|cut|cut|kesmoq
+hit|hit|hit|urmoq
+hurt|hurt|hurt|og'ritmoq, jarohatlamoq
+let|let|let|ruxsat bermoq
+put|put|put|qo'ymoq
+quit|quit|quit|tark etmoq
+read|read|read|o'qimoq
+set|set|set|o'rnatmoq, belgilamoq
+shut|shut|shut|yopmoq
+spread|spread|spread|yoymoq, tarqalmoq
+become|became|become|bo'lmoq, aylanmoq
+come|came|come|kelmoq
+run|ran|run|yugurmoq; boshqarmoq
+bend|bent|bent|egmoq
+bring|brought|brought|olib kelmoq
+build|built|built|qurmoq
+buy|bought|bought|sotib olmoq
+catch|caught|caught|tutmoq, ilib olmoq
+deal|dealt|dealt|shug'ullanmoq (deal with)
+feed|fed|fed|ovqatlantirmoq
+feel|felt|felt|his qilmoq
+fight|fought|fought|kurashmoq, jang qilmoq
+find|found|found|topmoq
+get|got|got/gotten|olmoq; bo'lmoq
+hang|hung|hung|osmoq
+have|had|had|ega bo'lmoq
+hear|heard|heard|eshitmoq
+hold|held|held|ushlamoq; o'tkazmoq
+keep|kept|kept|saqlamoq, ushlab turmoq
+lay|laid|laid|qo'ymoq, yotqizmoq
+lead|led|led|boshqarmoq, olib bormoq
+leave|left|left|tark etmoq, qoldirmoq
+lend|lent|lent|qarz bermoq
+lose|lost|lost|yo'qotmoq
+make|made|made|qilmoq, yasamoq
+mean|meant|meant|anglatmoq
+meet|met|met|uchrashmoq
+pay|paid|paid|to'lamoq
+say|said|said|demoq
+seek|sought|sought|izlamoq
+sell|sold|sold|sotmoq
+send|sent|sent|yubormoq
+shine|shone|shone|porlamoq
+shoot|shot|shot|otmoq (qurol)
+sit|sat|sat|o'tirmoq
+sleep|slept|slept|uxlamoq
+spend|spent|spent|sarflamoq; o'tkazmoq (vaqt)
+stand|stood|stood|turmoq
+stick|stuck|stuck|yopishmoq, yopishtirmoq
+strike|struck|struck|urmoq, zarba bermoq
+teach|taught|taught|o'rgatmoq
+tell|told|told|aytmoq
+think|thought|thought|o'ylamoq
+understand|understood|understood|tushunmoq
+win|won|won|g'alaba qozonmoq
+arise|arose|arisen|paydo bo'lmoq
+be|was/were|been|bo'lmoq
+beat|beat|beaten|urmoq; mag'lub etmoq
+begin|began|begun|boshlamoq
+bite|bit|bitten|tishlamoq
+blow|blew|blown|esmoq, puflamoq
+break|broke|broken|sindirmoq
+choose|chose|chosen|tanlamoq
+do|did|done|qilmoq
+draw|drew|drawn|chizmoq; tortmoq
+drink|drank|drunk|ichmoq
+drive|drove|driven|haydamoq (mashina)
+eat|ate|eaten|yemoq
+fall|fell|fallen|yiqilmoq; tushmoq
+fly|flew|flown|uchmoq
+forget|forgot|forgotten|unutmoq
+forgive|forgave|forgiven|kechirmoq
+freeze|froze|frozen|muzlamoq
+give|gave|given|bermoq
+go|went|gone/been|bormoq
+grow|grew|grown|o'smoq; yetishtirmoq
+hide|hid|hidden|yashirmoq; yashirinmoq
+know|knew|known|bilmoq
+lie|lay|lain|yotmoq
+prove|proved|proven/proved|isbotlamoq
+ride|rode|ridden|minmoq (ot, velosiped)
+ring|rang|rung|jiringlamoq; qo'ng'iroq qilmoq
+rise|rose|risen|ko'tarilmoq
+see|saw|seen|ko'rmoq
+shake|shook|shaken|silkitmoq
+show|showed|shown|ko'rsatmoq
+sing|sang|sung|kuylamoq
+sink|sank|sunk|cho'kmoq
+speak|spoke|spoken|gapirmoq
+steal|stole|stolen|o'g'irlamoq
+swim|swam|swum|suzmoq
+take|took|taken|olmoq
+tear|tore|torn|yirtmoq
+throw|threw|thrown|uloqtirmoq
+undergo|underwent|undergone|boshdan kechirmoq
+wake|woke|woken|uyg'onmoq; uyg'otmoq
+wear|wore|worn|kiymoq
+withdraw|withdrew|withdrawn|qaytarib olmoq, chiqarib olmoq
+write|wrote|written|yozmoq`;
 const D={};for(const u in RAW)D[u]=RAW[u].split("\n").map(l=>{const i=l.indexOf("=");return{en:l.slice(0,i),uz:l.slice(i+1)}});
 const ALL=Object.values(D).flat();
-const TK=s=>s.split(/[,;\/]\s*/).map(x=>x.trim());
-const key=s=>TK(s).sort().join('|');
-const share=(a,b)=>{const t=TK(b.uz);return TK(a.uz).some(x=>t.includes(x))};
-const TIME=15,TT=30,app=document.getElementById("app");
+const IV=IRR.split("\n").map(l=>{const p=l.split("|");return{en:p[0],v2:p[1],v3:p[2],uz:p[3]}});
+D.r1=IV.slice(0,33);D.r2=IV.slice(33,69);D.r3=IV.slice(69);
+const RL={r1:"1–33",r2:"34–69",r3:"70–100"},MN={c:"Variantli test",t:"Yozma test",i:"Noto'g'ri fellar",w:"Noto'g'ri fel yozmasi"};
+const lab=o=>o.v2.replace(/\//g," / ")+" — "+o.v3.replace(/\//g," / ");
+const fullA=o=>[o.en,o.v2,o.v3].map(x=>x.replace(/\//g," / ")).join(" — ");
+const TIME=15,TT=30,TW=45,app=document.getElementById("app");
 const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 const fmt=s=>Math.floor(s/60)+":"+String(Math.round(s%60)).padStart(2,"0");
 const load=()=>{try{return JSON.parse(localStorage.getItem("wq2")||"{}")}catch(e){return{}}};
 const save=(k,r)=>{try{const d=load(),o=d[k]||{runs:0,best:0,bestT:0,c:0,n:0};o.runs++;o.c+=r.c;o.n+=r.n;if(r.c>o.best||(r.c===o.best&&r.t<o.bestT)){o.best=r.c;o.bestT=r.t}d[k]=o;localStorage.setItem("wq2",JSON.stringify(d))}catch(e){}};
 let S;
 function home(){
-const d=load(),grid=m=>[1,2,3,4,5,6,7,8,9,10].map(u=>{const o=d[m+u];return`<button class="ut" data-u="${u}" data-m="${m}"><b>${u}</b><small>${o?o.best+"/"+D[u].length:"—"}</small></button>`}).join("");
-app.innerHTML=`<div class="hero"><h1>📚 English Word Quiz</h1><p>Unit 1–10 · so'zlarni yodlang va sinang</p></div>
-<div class="c"><h2>1-bo'lim · Variantli test<span class="tag">4 variant</span></h2><div class="g">${grid("c")}</div></div>
-<div class="c"><h2>2-bo'lim · Yozma test<span class="tag">harflar</span></h2><div class="g">${grid("t")}</div></div>
-<p class="rec">Katak ostidagi son — shu unitdagi eng yaxshi natijangiz</p>`;
+const d=load(),grid=(m,list)=>list.map(u=>{const o=d[m+u];return`<button class="ut" data-u="${u}" data-m="${m}"><b>${RL[u]||u}</b><small>${o?o.best+"/"+Math.round(o.n/o.runs):"—"}</small></button>`}).join(""),U=[1,2,3,4,5],R=["r1","r2","r3"];
+app.innerHTML=`<div class="hero"><h1>📚 English Word Quiz</h1><p>Unit 1–5 va noto'g'ri fellar · yodlang va sinang</p></div>
+<div class="c"><h2>1-bo'lim · Variantli test<span class="tag">4 variant</span></h2><div class="g">${grid("c",U)}</div></div>
+<div class="c"><h2>2-bo'lim · Yozma test<span class="tag">harflar</span></h2><div class="g">${grid("t",U)}</div></div>
+<div class="c"><h2>3-bo'lim · Noto'g'ri fellar<span class="tag">4 variant</span></h2><div class="g g3">${grid("i",R)}</div></div>
+<div class="c"><h2>4-bo'lim · Noto'g'ri fel yozmasi<span class="tag">V1 V2 V3</span></h2><div class="g g3">${grid("w",R)}</div></div>
+<p class="rec">Katak ostidagi son — shu bo'limdagi eng yaxshi natijangiz</p>`;
 app.querySelectorAll("[data-u]").forEach(b=>b.onclick=()=>start(b.dataset.u,b.dataset.m));
 }
 function start(u,m){
 S={u,m,i:0,log:[],t0:Date.now()};
 const words=sh(D[u]);
-S.qs=words.map(w=>({w,opts:m==="c"?sh([w,...sh(ALL.filter(x=>x.en!==w.en&&!share(x,w))).slice(0,3)]):null}));
+S.qs=words.map(w=>{let opts=null;
+if(m==="c")opts=sh([w,...sh(ALL.filter(x=>x.en!==w.en)).slice(0,3)]);
+if(m==="i"){const ls=new Set([lab(w)]),ds=[];for(const x of sh(IV)){const l=lab(x);if(!ls.has(l)){ls.add(l);ds.push(x);if(ds.length===3)break}}opts=sh([w,...ds])}
+return{w,opts}});
 ask();
 }
 function topBar(left){return`<button class="back" id="bk">← Bosh sahifa</button>
@@ -286,17 +297,17 @@ let left=T;clearInterval(S.iv);
 S.iv=setInterval(()=>{left--;document.getElementById("tm").textContent="⏱ "+left;if(left<=0)onEnd()},1000);
 }
 function next(ms){setTimeout(()=>{S.i++;S.i<S.qs.length?ask():result()},ms)}
-function ask(){S.done=false;S.qt=Date.now();S.m==="c"?askC():askT()}
+function ask(){S.done=false;S.qt=Date.now();({c:askC,i:askC,t:askT,w:askW})[S.m]()}
 function askC(){
-const q=S.qs[S.i];
-app.innerHTML=topBar(TIME)+`<div class="q">${q.w.uz}</div>${q.opts.map((o,k)=>`<button class="o" data-k="${k}">${o.en}</button>`).join("")}`;
+const q=S.qs[S.i],I=S.m==="i";
+app.innerHTML=topBar(TIME)+`<div class="q">${I?q.w.en+`<small>${q.w.uz} · V2 — V3 ni tanlang</small>`:q.w.uz}</div>${q.opts.map((o,k)=>`<button class="o" data-k="${k}">${I?lab(o):o.en}</button>`).join("")}`;
 app.querySelectorAll(".o").forEach(b=>b.onclick=()=>pick(+b.dataset.k));
 wire(TIME,()=>pick(-1));
 }
 function pick(k){
 if(S.done)return;S.done=true;clearInterval(S.iv);
-const q=S.qs[S.i],ok=k>=0&&q.opts[k].en===q.w.en;
-S.log.push({w:q.w,ans:k>=0?q.opts[k].en:null,ok,sec:(Date.now()-S.qt)/1000});
+const q=S.qs[S.i],I=S.m==="i",ok=k>=0&&q.opts[k].en===q.w.en;
+S.log.push({w:q.w,ans:k>=0?(I?lab(q.opts[k]):q.opts[k].en):null,ok,sec:(Date.now()-S.qt)/1000,t:I?q.w.en+" — "+q.w.uz:null,co:I?lab(q.w):null});
 app.querySelectorAll(".o").forEach((b,j)=>{b.disabled=true;if(q.opts[j].en===q.w.en)b.classList.add("ok");else if(j===k)b.classList.add("no")});
 document.getElementById("br").style.transition="none";next(1000);
 }
@@ -315,7 +326,7 @@ document.getElementById("ck").onclick=submit;
 draw();inp.focus();
 function submit(){
 if(S.done)return;S.done=true;clearInterval(S.iv);
-const v=inp.value.toLowerCase(),ok=v===w||ALL.some(x=>x.en===v&&key(x.uz)===key(q.w.uz));
+const v=inp.value.toLowerCase(),ok=v===w;
 S.log.push({w:q.w,ans:v||null,ok,sec:(Date.now()-S.qt)/1000});
 inp.disabled=true;document.getElementById("br").style.transition="none";
 bx.querySelectorAll(".b").forEach((e,i)=>{e.classList.remove("f");e.classList.add(v[i]===w[i]?"ok":"no")});
@@ -324,18 +335,43 @@ next(ok?900:2000);
 }
 wire(TT,submit);
 }
+function askW(){
+const w=S.qs[S.i].w,alts=[w.en,w.v2,w.v3].map(s=>s.split("/")),L=alts.map(a=>Math.max(...a.map(x=>x.length)));
+let s=0;const vals=["","",""];
+app.innerHTML=topBar(TW)+`<div class="q">${w.uz}</div><div class="hint">V1, V2, V3 ni yozing — har biridan keyin Enter</div><div class="rows">`+["V1 (infinitive)","V2 (past simple)","V3 (past participle)"].map((t,j)=>`<div class="rw"><small>${t}</small><div class="bx">${'<span class="b"></span>'.repeat(L[j])}</div></div>`).join("")+`<input id="in" class="hid" maxlength="${L[0]}" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></div><button class="big" id="ck">Keyingisi (Enter)</button><div class="fb" id="fb"></div>`;
+const inp=document.getElementById("in"),rows=[...app.querySelectorAll(".rw")],ck=document.getElementById("ck");
+const draw=()=>rows.forEach((r,j)=>{const t=j<s?vals[j]:j===s?inp.value:"";r.querySelectorAll(".b").forEach((e,i)=>{e.textContent=t[i]||"";e.classList.toggle("f",j===s&&i===Math.min(inp.value.length,L[j]-1))})});
+function go(){
+if(S.done)return;
+if(s<2){vals[s]=inp.value;s++;inp.value="";inp.maxLength=L[s];if(s===2)ck.textContent="Tekshirish (Enter)";draw();inp.focus()}else submit();
+}
+function submit(){
+if(S.done)return;S.done=true;clearInterval(S.iv);vals[s]=inp.value;
+const low=vals.map(v=>v.toLowerCase()),oks=low.map((v,j)=>alts[j].includes(v)),ok=oks.every(Boolean);
+S.log.push({w,ok,ans:vals.some(v=>v)?vals.map(v=>v||"—").join(" — "):null,sec:(Date.now()-S.qt)/1000,co:fullA(w)});
+inp.disabled=true;document.getElementById("br").style.transition="none";
+rows.forEach((r,j)=>r.querySelectorAll(".b").forEach((e,i)=>{const t=low[j];e.textContent=vals[j][i]||"";e.classList.remove("f");const c=oks[j]?(i<t.length?"ok":""):(t[i]&&t[i]===alts[j][0][i]?"ok":"no");if(c)e.classList.add(c)}));
+document.getElementById("fb").innerHTML=ok?`<span class="good">✅ To'g'ri!</span>`:`<span class="bad">❌ To'g'ri javob:</span> <b class="good">${fullA(w)}</b>`;
+next(ok?900:2500);
+}
+inp.oninput=()=>{inp.value=inp.value.replace(/[^a-zA-Z]/g,"");draw()};
+inp.onkeydown=e=>{if(e.key==="Enter")go()};
+ck.onclick=go;
+draw();inp.focus();
+wire(TW,submit);
+}
 function result(){
 const n=S.log.length,c=S.log.filter(x=>x.ok).length,tot=(Date.now()-S.t0)/1000,k=S.m+S.u;
-const prev=load()[k];save(k,{c,n,t:tot});
+save(k,{c,n,t:tot});
 const o=load()[k],pct=Math.round(c/n*100);
 const avg=(S.log.reduce((a,x)=>a+x.sec,0)/n).toFixed(1);
-app.innerHTML=`<div class="hero"><h1>Natija</h1><p>${S.u}-unit · ${S.m==="c"?"Variantli test":"Yozma test"}</p></div>
+app.innerHTML=`<div class="hero"><h1>Natija</h1><p>${RL[S.u]?RL[S.u]+" fellar":S.u+"-unit"} · ${MN[S.m]}</p></div>
 <div class="c"><div class="sc">${c} / ${n}</div><div class="pb"><i style="width:${pct}%"></i></div>
 <div class="st"><div><b class="good">${c}</b>to'g'ri</div><div><b class="bad">${n-c}</b>xato</div><div><b>${pct}%</b>foiz</div></div>
 <div class="st"><div><b>${fmt(tot)}</b>umumiy vaqt</div><div><b>${avg} s</b>o'rtacha / savol</div>${o?`<div><b>${o.best}/${n}</b>rekord</div>`:""}</div>
-${o?`<p class="rec">Shu unit bo'yicha ${o.runs} marta topshirdingiz · umumiy ${Math.round(o.c/o.n*100)}%</p>`:""}</div>
-<div class="c">${S.log.map(x=>`<div class="r"><span class="t">${x.ok?"✅":"❌"} ${x.w.uz}</span><br>
-To'g'ri: <b class="good">${x.w.en}</b>${x.ok?"":` · Sizniki: <span class="bad">${x.ans??"vaqt tugadi"}</span>`} <span style="color:var(--mu)">· ${x.sec.toFixed(1)} s</span></div>`).join("")}</div>
+${o?`<p class="rec">Shu bo'lim bo'yicha ${o.runs} marta topshirdingiz · umumiy ${Math.round(o.c/o.n*100)}%</p>`:""}</div>
+<div class="c">${S.log.map(x=>`<div class="r"><span class="t">${x.ok?"✅":"❌"} ${x.t||x.w.uz}</span><br>
+To'g'ri: <b class="good">${x.co||x.w.en}</b>${x.ok?"":` · Sizniki: <span class="bad">${x.ans??"vaqt tugadi"}</span>`} <span style="color:var(--mu)">· ${x.sec.toFixed(1)} s</span></div>`).join("")}</div>
 <button class="big" id="ag">Qayta boshlash</button><div style="height:10px"></div><button class="big" id="hm">Bosh sahifa</button>`;
 document.getElementById("ag").onclick=()=>start(S.u,S.m);
 document.getElementById("hm").onclick=home;
