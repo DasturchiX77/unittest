@@ -258,7 +258,8 @@ const D={};for(const u in RAW)D[u]=RAW[u].split("\n").map(l=>{const i=l.indexOf(
 const ALL=Object.values(D).flat();
 const IV=IRR.split("\n").map(l=>{const p=l.split("|");return{en:p[0],v2:p[1],v3:p[2],uz:p[3]}});
 D.r1=IV.slice(0,33);D.r2=IV.slice(33,69);D.r3=IV.slice(69);
-const RL={r1:"1–33",r2:"34–69",r3:"70–100"},MN={c:"Variantli test",t:"Yozma test",i:"Noto'g'ri fellar",w:"Noto'g'ri fel yozmasi"};
+const RL={r1:"1–33",r2:"34–69",r3:"70–100"},MN={c:"Variantli test",t:"Yozma test",i:"Noto'g'ri fellar",w:"Noto'g'ri fel yozmasi",v:"Tezkor test (V1)"};
+const tk=o=>o.uz.replace(/\(.*?\)/g,"").split(/[,;]/).map(x=>x.trim()).filter(Boolean);
 const lab=o=>o.v2.replace(/\//g," / ")+" — "+o.v3.replace(/\//g," / ");
 const fullA=o=>[o.en,o.v2,o.v3].map(x=>x.replace(/\//g," / ")).join(" — ");
 const TIME=15,TT=30,TW=45,app=document.getElementById("app");
@@ -274,6 +275,7 @@ app.innerHTML=`<div class="hero"><h1>📚 English Word Quiz</h1><p>Unit 1–5 va
 <div class="c"><h2>2-bo'lim · Yozma test<span class="tag">harflar</span></h2><div class="g">${grid("t",U)}</div></div>
 <div class="c"><h2>3-bo'lim · Noto'g'ri fellar<span class="tag">4 variant</span></h2><div class="g g3">${grid("i",R)}</div></div>
 <div class="c"><h2>4-bo'lim · Noto'g'ri fel yozmasi<span class="tag">V1 V2 V3</span></h2><div class="g g3">${grid("w",R)}</div></div>
+<div class="c"><h2>5-bo'lim · Tezkor test (V1)<span class="tag">o'zbekcha → V1</span></h2><div class="g g3">${grid("v",R)}</div></div>
 <p class="rec">Katak ostidagi son — shu bo'limdagi eng yaxshi natijangiz</p>`;
 app.querySelectorAll("[data-u]").forEach(b=>b.onclick=()=>start(b.dataset.u,b.dataset.m));
 }
@@ -282,6 +284,7 @@ S={u,m,i:0,log:[],t0:Date.now()};
 const words=sh(D[u]);
 S.qs=words.map(w=>{let opts=null;
 if(m==="c")opts=sh([w,...sh(ALL.filter(x=>x.en!==w.en)).slice(0,3)]);
+if(m==="v"){const t=new Set(tk(w));opts=sh([w,...sh(IV.filter(x=>x.en!==w.en&&!tk(x).some(y=>t.has(y)))).slice(0,3)])}
 if(m==="i"){const ls=new Set([lab(w)]),ds=[];for(const x of sh(IV)){const l=lab(x);if(!ls.has(l)){ls.add(l);ds.push(x);if(ds.length===3)break}}opts=sh([w,...ds])}
 return{w,opts}});
 ask();
@@ -297,7 +300,7 @@ let left=T;clearInterval(S.iv);
 S.iv=setInterval(()=>{left--;document.getElementById("tm").textContent="⏱ "+left;if(left<=0)onEnd()},1000);
 }
 function next(ms){setTimeout(()=>{S.i++;S.i<S.qs.length?ask():result()},ms)}
-function ask(){S.done=false;S.qt=Date.now();({c:askC,i:askC,t:askT,w:askW})[S.m]()}
+function ask(){S.done=false;S.qt=Date.now();({c:askC,i:askC,v:askC,t:askT,w:askW})[S.m]()}
 function askC(){
 const q=S.qs[S.i],I=S.m==="i";
 app.innerHTML=topBar(TIME)+`<div class="q">${I?q.w.en+`<small>${q.w.uz} · V2 — V3 ni tanlang</small>`:q.w.uz}</div>${q.opts.map((o,k)=>`<button class="o" data-k="${k}">${I?lab(o):o.en}</button>`).join("")}`;
